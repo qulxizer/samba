@@ -1,0 +1,14 @@
+apt-cache policy openssh-server
+sudo apt install openssh-server
+systemctl status ssh
+sudo systemctl enable --now ssh
+
+echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+
+apt-get remove -y --purge x11-common
+apt-get autoremove -y --purge
+apt-get install -y deborphan
+deborphan | xargs dpkg -P # do this a bunch of times
+
+
+reboot
